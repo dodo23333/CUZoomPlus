@@ -1,7 +1,7 @@
 # Zoom Plus
 ![GitHub License](https://img.shields.io/github/license/dodo23333/CUZoomPlus)
 ![GitHub Release](https://img.shields.io/github/v/release/dodo23333/CUZoomPlus)
-![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/dodo23333/CUZoomPlus/total)
+![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/dodo23333/CUZoomPlus/total?logo=github&color=blue)
 
 This mod allows you to change the zoom range of the camera. 
 If your screen is small, you can make the view larger.

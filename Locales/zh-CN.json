@@ -1,0 +1,6 @@
+{
+  "other": {
+    "gamesetcuzoomplus.zoom.multiplier": "视野缩放倍率",
+    "gamesetcuzoomplus.zoom.multiplierdsc": "基于原版视野进行缩放。低于1.0会缩小视野，高于1.0会扩大视野"
+  }
+}

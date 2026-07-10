@@ -1,0 +1,10 @@
+<Project>
+  <!--
+    Copy this file to LocalPaths.props and change the paths to your local game install.
+    LocalPaths.props is ignored by git because it contains machine-specific paths.
+  -->
+  <PropertyGroup>
+    <PLUGIN_DIR>/absolute/path/to/Casualties Unknown Demo/BepInEx/plugins</PLUGIN_DIR>
+    <GAME_MANAGED_DIR>/absolute/path/to/Casualties Unknown Demo/CasualtiesUnknown_Data/Managed</GAME_MANAGED_DIR>
+  </PropertyGroup>
+</Project>

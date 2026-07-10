@@ -1,0 +1,6 @@
+{
+  "other": {
+    "gamesetcuzoomplus.zoom.multiplier": "View scale",
+    "gamesetcuzoomplus.zoom.multiplierdsc": "Multiplies the default view. Values below 1.0 zoom in; values above 1.0 zoom out."
+  }
+}

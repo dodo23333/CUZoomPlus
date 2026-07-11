@@ -1,6 +1,14 @@
 {
   "other": {
     "gamesetcuzoomplus.zoom.multiplier": "视野缩放倍率",
-    "gamesetcuzoomplus.zoom.multiplierdsc": "基于原版视野进行缩放。低于1.0会缩小视野，高于1.0会扩大视野"
+    "gamesetcuzoomplus.zoom.multiplierdsc": "基于原版视野进行缩放。低于1.0会缩小视野，高于1.0会扩大视野",
+    "gamesetcuzoomplus.zoom.in.key": "放大视野",
+    "gamesetcuzoomplus.zoom.in.keydsc": "用于拉近视野的按键",
+    "gamesetcuzoomplus.zoom.out.key": "缩小视野",
+    "gamesetcuzoomplus.zoom.out.keydsc": "用于拉远视野的按键",
+    "gamesetcuzoomplus.zoom.factor": "缩放倍率",
+    "gamesetcuzoomplus.zoom.factordsc": "放大时将视野倍率乘以此值，缩小时将视野倍率除以此值（比例缩放）",
+    "gamesetcuzoomplus.zoom.smooth": "平滑缩放",
+    "gamesetcuzoomplus.zoom.smoothdsc": "加入平滑动画，而不是瞬间改变视野"
   }
 }

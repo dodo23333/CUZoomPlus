@@ -7,6 +7,9 @@ This mod allows you to change the zoom range of the camera.
 If your screen is small, you can make the view larger.
 or if you want to see further on high resolution screen or watch further, try this mod!
 
+You can configure the key to zoom (default keys are `-` and `=`) under `Controls` since v1.0.1.
+I also add an beautiful smooth animation when you zoom!
+
 The mod is compatible with [Casualties Together](https://github.com/creaturefeaturelarry/casualties-together).
 
 ## Installation instructions

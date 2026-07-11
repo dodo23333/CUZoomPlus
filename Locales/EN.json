@@ -1,6 +1,14 @@
 {
   "other": {
     "gamesetcuzoomplus.zoom.multiplier": "View scale",
-    "gamesetcuzoomplus.zoom.multiplierdsc": "Multiplies the default view. Values below 1.0 zoom in; values above 1.0 zoom out."
+    "gamesetcuzoomplus.zoom.multiplierdsc": "Multiplies the default view. Values below 1.0 zoom in; values above 1.0 zoom out.",
+    "gamesetcuzoomplus.zoom.in.key": "Zoom in",
+    "gamesetcuzoomplus.zoom.in.keydsc": "Key used to zoom in.",
+    "gamesetcuzoomplus.zoom.out.key": "Zoom out",
+    "gamesetcuzoomplus.zoom.out.keydsc": "Key used to zoom out.",
+    "gamesetcuzoomplus.zoom.factor": "Zoom factor",
+    "gamesetcuzoomplus.zoom.factordsc": "Zooming in multiplies the view scale by this value; zooming out divides by it. (proportional zoom)",
+    "gamesetcuzoomplus.zoom.smooth": "Smooth zoom",
+    "gamesetcuzoomplus.zoom.smoothdsc": "Applying zoom with smooth animation instead of applying them immediately."
   }
 }

@@ -11,12 +11,17 @@ namespace CUZoomPlus;
 [BepInDependency("net.cucorelib", BepInDependency.DependencyFlags.HardDependency)]
 public class Plugin : BaseUnityPlugin
 {
+    private const float SmoothZoomSpeed = 15f;
+
     internal static new ManualLogSource Logger;
 
     private Camera activeCamera;
     private Transform sightLimiter;
     private float normalOrthographicSize;
     private Vector3 normalSightLimiterScale;
+    private float currentZoomMultiplier = 1f;
+    private float targetZoomMultiplier = 1f;
+    private float lastConfiguredZoomMultiplier = 1f;
 
     private void Awake()
     {
@@ -58,6 +63,9 @@ public class Plugin : BaseUnityPlugin
         }
 
         TrackCamera(renderingCamera);
+        SyncConfiguredZoom();
+        HandleZoomInput();
+        UpdateZoomAnimation();
         ApplyZoom(renderingCamera);
     }
 
@@ -72,6 +80,9 @@ public class Plugin : BaseUnityPlugin
         activeCamera = renderingCamera;
         sightLimiter = renderingCamera.transform.Find("SightLimiter");
         normalOrthographicSize = renderingCamera.orthographicSize;
+        currentZoomMultiplier = Settings.ZoomMultiplier;
+        targetZoomMultiplier = Settings.ZoomMultiplier;
+        lastConfiguredZoomMultiplier = Settings.ZoomMultiplier;
 
         if (sightLimiter)
         {
@@ -79,6 +90,64 @@ public class Plugin : BaseUnityPlugin
         }
 
         RenderPipelineManager.beginCameraRendering += ApplyZoomBeforeRendering;
+    }
+
+    private void SyncConfiguredZoom()
+    {
+        if (Mathf.Approximately(lastConfiguredZoomMultiplier, Settings.ZoomMultiplier))
+        {
+            return;
+        }
+
+        lastConfiguredZoomMultiplier = Settings.ZoomMultiplier;
+        targetZoomMultiplier = Settings.ZoomMultiplier;
+    }
+
+    private void HandleZoomInput()
+    {
+        float requestedMultiplier = targetZoomMultiplier;
+
+        if (Input.GetKeyDown(Settings.ZoomInKey))
+        {
+            requestedMultiplier *= Settings.ZoomFactor;
+        }
+
+        if (Input.GetKeyDown(Settings.ZoomOutKey))
+        {
+            requestedMultiplier /= Settings.ZoomFactor;
+        }
+
+        requestedMultiplier = Mathf.Clamp(
+            requestedMultiplier,
+            Settings.MinZoomMultiplier,
+            Settings.MaxZoomMultiplier
+        );
+
+        if (Mathf.Approximately(requestedMultiplier, targetZoomMultiplier))
+        {
+            return;
+        }
+
+        targetZoomMultiplier = requestedMultiplier;
+        lastConfiguredZoomMultiplier = requestedMultiplier;
+        Settings.SetZoomMultiplier(requestedMultiplier);
+    }
+
+    private void UpdateZoomAnimation()
+    {
+        if (!Settings.SmoothZoom)
+        {
+            currentZoomMultiplier = targetZoomMultiplier;
+            return;
+        }
+
+        float interpolation = 1f - Mathf.Exp(-SmoothZoomSpeed * Time.unscaledDeltaTime);
+        currentZoomMultiplier = Mathf.Lerp(currentZoomMultiplier, targetZoomMultiplier, interpolation);
+
+        if (Mathf.Abs(currentZoomMultiplier - targetZoomMultiplier) < 0.0001f)
+        {
+            currentZoomMultiplier = targetZoomMultiplier;
+        }
     }
 
     private void ApplyZoomBeforeRendering(ScriptableRenderContext context, Camera renderingCamera)
@@ -93,13 +162,13 @@ public class Plugin : BaseUnityPlugin
             return;
         }
 
-        renderingCamera.orthographicSize = normalOrthographicSize * Settings.ZoomMultiplier;
+        renderingCamera.orthographicSize = normalOrthographicSize * currentZoomMultiplier;
 
         if (sightLimiter)
         {
             sightLimiter.localScale = new Vector3(
-                normalSightLimiterScale.x * Settings.ZoomMultiplier,
-                normalSightLimiterScale.y * Settings.ZoomMultiplier,
+                normalSightLimiterScale.x * currentZoomMultiplier,
+                normalSightLimiterScale.y * currentZoomMultiplier,
                 normalSightLimiterScale.z
             );
         }
@@ -123,5 +192,8 @@ public class Plugin : BaseUnityPlugin
         sightLimiter = null;
         normalOrthographicSize = 0f;
         normalSightLimiterScale = Vector3.one;
+        currentZoomMultiplier = Settings.ZoomMultiplier;
+        targetZoomMultiplier = Settings.ZoomMultiplier;
+        lastConfiguredZoomMultiplier = Settings.ZoomMultiplier;
     }
 }
